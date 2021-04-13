@@ -4,14 +4,14 @@ import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import New from './pages/New';
 
-export default function Routes () {
+export default function Routes() {
   return (
     <BrowserRouter>
-      <Switch >
+      <Switch>
         <Route path="/" exact component={Login} />
         <Route path="/dashboard" component={Dashboard} />
         <Route path="/new" component={New} />
       </Switch>
     </BrowserRouter>
-  )
+  );
 }

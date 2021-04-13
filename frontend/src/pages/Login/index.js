@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import api from '../../services/api';
-
 import './styles.css';
 
-export default function Login ({ history }) {
+export default function Login({ history }) {
   const [email, setEmail] = useState('');
 
   async function handleSubmit(e) {
@@ -19,7 +19,9 @@ export default function Login ({ history }) {
 
   return (
     <>
-      <p>Offer <strong>spots</strong>. Find new <strong>talents</strong>!</p>
+      <p>
+        Offer <strong>spots</strong>. Find new <strong>talents</strong>!
+      </p>
 
       <form onSubmit={handleSubmit}>
         <label htmlFor="email">Email *</label>
@@ -31,8 +33,21 @@ export default function Login ({ history }) {
           type="email"
         />
 
-        <button className="btn" type="submit">Submit</button>
+        <button className="btn" type="submit">
+          Submit
+        </button>
       </form>
     </>
-  )
+  );
 }
+
+Login.propTypes = {
+  history: PropTypes.shape({
+    length: PropTypes.number,
+    push: PropTypes.func,
+  }),
+};
+
+Login.defaultProps = {
+  history: {},
+};

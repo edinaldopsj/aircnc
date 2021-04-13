@@ -9,16 +9,16 @@ export default function Dashboard() {
 
   useEffect(() => {
     async function loadSpots() {
-      const user_id = localStorage.getItem('user');
+      const userId = localStorage.getItem('user');
       const response = await api.get('/dashboard', {
-        headers: { user_id }
+        headers: { user_id: userId },
       });
 
       setSpots(response.data);
     }
 
     loadSpots();
-  }, [])
+  }, []);
 
   return (
     <>
@@ -33,8 +33,10 @@ export default function Dashboard() {
       </ul>
 
       <Link to="/new">
-        <button className="btn">Create new spot</button>
+        <button type="submit" className="btn">
+          Create new spot
+        </button>
       </Link>
     </>
-  )
+  );
 }
