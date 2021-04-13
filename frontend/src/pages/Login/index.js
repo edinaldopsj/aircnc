@@ -5,16 +5,22 @@ import './styles.css';
 
 export default function Login({ history }) {
   const [email, setEmail] = useState('');
+  const [valid, setValid] = useState(false);
 
   async function handleSubmit(e) {
     e.preventDefault();
 
-    const response = await api.post('/sessions', { email });
+    if (!email) setValid(false);
+    else {
+      setValid(true);
 
-    const { _id } = response.data;
+      const response = await api.post('/sessions', { email });
 
-    localStorage.setItem('user', _id);
-    history.push('/dashboard');
+      const { _id } = response.data;
+
+      localStorage.setItem('user', _id);
+      history.push('/dashboard');
+    }
   }
 
   return (
@@ -32,6 +38,9 @@ export default function Login({ history }) {
           onChange={event => setEmail(event.target.value)}
           type="email"
         />
+        {!valid && (
+          <p style={{ padding: '10px' }}>Please, use a valid email!</p>
+        )}
 
         <button className="btn" type="submit">
           Submit
